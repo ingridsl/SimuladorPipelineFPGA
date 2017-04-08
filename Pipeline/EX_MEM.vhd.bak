@@ -1,0 +1,28 @@
+------- EX_MEM -----
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity EX_MEM is
+	generic(WSIZE : natural := 32);
+	port (
+			clk		: in std_logic;
+			instr		: in std_logic_vector (WSIZE-1 DOWNTO 0);
+			ula_ctr : in std_logic_vector (3 downto 0);
+			saida1, saida2 : in std_logic_vector (WSIZE-1 downto 0);
+			RegDst : in std_logic;
+			WriData	: in std_logic_vector (WSIZE-1 downto 0);
+			ResultULAFwd	: in std_logic_vector (WSIZE-1 downto 0);
+			OrigAALU : in std_logic_vector (1 DOWNTO 0);
+			OrigBALU : in std_logic_vector (1 DOWNTO 0); 
+			ResultULA	: out std_logic_vector (WSIZE-1 downto 0);
+			vai, zero, ovfl : out std_logic;
+			fwdWrtReg1 : out std_logic_vector (4 downto 0)
+	);
+end EX_MEM;
+
+architecture ex_memArc of EX_MEM is
+
+begin	
+	
+end ex_memArc;

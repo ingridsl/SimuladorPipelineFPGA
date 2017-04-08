@@ -1,0 +1,31 @@
+------- ID_EX -----
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity ID_EX is
+	port (
+			clk, rst	: IN std_logic;
+			ula_ctr : OUT std_logic_vector(3 downto 0); -- ulaCONTROL
+			EscreveIR	: OUT std_logic;
+			EscrevePC	: OUT std_logic;
+			EscreveMem	: OUT std_logic;
+			EscrevePCCond	: OUT std_logic; 
+			Branchifnotequal	: OUT std_logic;
+			MemparaReg	: OUT std_logic;
+			IouD	: OUT std_logic; -- não usamos
+			OrigPC	: OUT std_logic;
+			OrigAALU : OUT std_logic_vector (1 DOWNTO 0);
+			OrigBALU : OUT std_logic_vector (1 DOWNTO 0); 
+			EscreveRegFwd	: OUT std_logic;
+			RegDst	: OUT std_logic;
+			is_BxxZ  : OUT std_logic;
+			PCbranch	: OUT std_logic_vector (WSIZE-1 downto 0);
+			saida1, saida2 : OUT std_logic_vector (WSIZE-1 downto 0)
+	);
+end ID_EX;
+
+architecture id_exArc of ID_EX is
+begin
+	
+end id_exArc;

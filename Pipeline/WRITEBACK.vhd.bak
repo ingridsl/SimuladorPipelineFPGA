@@ -1,0 +1,45 @@
+------- WRITEBACK -----
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity WRITEBACK is
+	generic(WSIZE : natural := 32);
+	port (
+			rst		: in std_logic;
+			ResultMemDado, ResultULA	: in std_logic_vector (WSIZE-1 downto 0);
+			MemparaReg	: in std_logic;
+			fwdWrtReg2 : in std_logic_vector (4 downto 0);
+			wadd : out std_logic_vector (4 downto 0);
+			WriData	: out std_logic_vector (WSIZE-1 downto 0)
+	);
+end WRITEBACK;
+
+architecture wbArc of WRITEBACK is
+component MUX
+	port (
+			IN0, IN1	: in std_logic_vector(WSIZE-1 downto 0);
+			sel	: in std_logic;
+			S	: out std_logic_vector(WSIZE-1 downto 0)
+	);
+end component;
+
+signal WriDataIN	: std_logic_vector (WSIZE-1 downto 0);
+
+begin
+	-- WRITE BACK
+	-- MUX que vai influenciar na etapa do banco de registradores
+	MUX_DATA: MUX port map (ResultMemDado, ResultULA, MemparaReg, WriDataIN);
+	
+	process(rst, ResultMemDado, ResultULA, MemparaReg, fwdWrtReg2, WriDataIN)
+	begin
+		if rst = '1' then
+			WriData <= (others => '0');
+			wadd <= (others => '0');
+		else
+			WriData <= WriDataIN;
+			wadd <= fwdWrtReg2;
+		end if;
+	end process;
+	
+end wbArc;
